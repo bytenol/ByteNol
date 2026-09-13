@@ -5,7 +5,6 @@ import AboutPage from "../pages/AboutPage/AboutPage";
 import ProductsPage from "../pages/ProductsPage/ProductsPage";
 import ResourcesPage from "../pages/ResourcesPage/ResourcesPage";
 import CoursesPage from "../pages/CoursesPage/CoursesPage";
-import CourseApplicationPage from "../pages/CourseApplicationPage/CourseApplicationPage";
 import ContactPage from "../pages/ContactPage/ContactPage";
 
 
@@ -33,11 +32,6 @@ const publicRoutes: RouteObject[] = [
     {
         path: "/courses",
         element: <CoursesPage />
-    },
-
-    {
-        path: "/courses/:courseSlug/apply",
-        element: <CourseApplicationPage />,
     },
 
     {

@@ -10,7 +10,7 @@ import { createContactReq } from "../contactApi";
 function ContactForm() {
 	const [selectedTopic, setSelectedTopic] = useState("");
 	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState("");
+	// const [error, setError] = useState("");
 	const [submitted, setSubmitted] = useState(false);
 
 	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -32,7 +32,7 @@ function ContactForm() {
 			const response = await createContactReq(body);
 			if(response.error) {
 				setLoading(false);
-				setError(response.error);
+				// setError(response.error);
 				return;
 			}
 			console.log("submitted successfully");
