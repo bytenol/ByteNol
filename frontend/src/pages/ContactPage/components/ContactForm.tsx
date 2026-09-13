@@ -3,18 +3,43 @@ import { ArrowRight, LoaderCircle, Send } from "lucide-react";
 import { motion } from "motion/react";
 
 import ContactTopics from "./ContactTopics";
+import type { contact_choice_t, iContact } from "../../../types/contact";
+import { createContactReq } from "../contactApi";
 
 
 function ContactForm() {
 	const [selectedTopic, setSelectedTopic] = useState("");
 	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState("");
 	const [submitted, setSubmitted] = useState(false);
 
 	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		setLoading(true);
 
-		await new Promise((resolve) => setTimeout(resolve, 800));
+		const formData = new FormData(event.currentTarget);
+
+		const body: iContact = {
+			first_name: formData.get("first_name") as string,
+			last_name: formData.get("last_name") as string,
+			email: formData.get("email") as string,
+			phone: formData.get("phone") as string,
+			choice: formData.get("choice") as contact_choice_t,
+			content: formData.get("content") as string,
+		}
+
+		try {
+			const response = await createContactReq(body);
+			if(response.error) {
+				setLoading(false);
+				setError(response.error);
+				return;
+			}
+			console.log("submitted successfully");
+		} catch(err) {
+			console.log("somethinf went wrong");
+		}
+		
 
 		setLoading(false);
 		setSubmitted(true);
@@ -76,15 +101,15 @@ function ContactForm() {
 			<div className="grid gap-5 sm:grid-cols-2">
 				<div>
 					<label
-						htmlFor="firstName"
+						htmlFor="first_name"
 						className="text-sm font-semibold"
 					>
 						First name
 					</label>
 
 					<input
-						id="firstName"
-						name="firstName"
+						id="first_name"
+						name="first_name"
 						required
 						placeholder="John"
 						className="mt-2 w-full rounded-xl border border-border bg-dark-soft px-4 py-3 text-sm outline-none transition focus:border-primary-dark focus:ring-4 focus:ring-primary-light"
@@ -93,15 +118,15 @@ function ContactForm() {
 
 				<div>
 					<label
-						htmlFor="lastName"
+						htmlFor="last_name"
 						className="text-sm font-semibold"
 					>
 						Last name
 					</label>
 
 					<input
-						id="lastName"
-						name="lastName"
+						id="last_name"
+						name="last_name"
 						required
 						placeholder="Doe"
 						className="mt-2 w-full rounded-xl border border-border bg-dark-soft px-4 py-3 text-sm outline-none transition focus:border-primary-dark focus:ring-4 focus:ring-primary-light"
@@ -150,20 +175,20 @@ function ContactForm() {
 					onSelect={setSelectedTopic}
 				/>
 
-				<input type="hidden" name="topic" value={selectedTopic} />
+				<input type="hidden" name="choice" value={selectedTopic} />
 			</div>
 
 			<div className="mt-7">
 				<label
-					htmlFor="message"
+					htmlFor="content"
 					className="text-sm font-semibold text-primary-dark"
 				>
 					Tell us more
 				</label>
 
 				<textarea
-					id="message"
-					name="message"
+					id="content"
+					name="content"
 					required
 					rows={6}
 					placeholder="Tell us about your project, question or idea..."

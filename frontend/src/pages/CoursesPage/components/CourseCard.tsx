@@ -1,103 +1,104 @@
-import { ArrowRight, Clock3, Layers3 } from "lucide-react";
+import {
+  ArrowRight,
+  Clock3,
+  Sparkles,
+} from "lucide-react";
+import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 
 import type { Course } from "../courseData";
+import CourseIllustration from "./CourseIllustration";
 
 interface CourseCardProps {
   course: Course;
 }
 
-const logoStyles = {
-  python: "bg-dark text-primary",
-  web: "bg-primary-light text-primary-dark",
-  kotlin: "bg-dark text-white",
-};
+function formatPrice(price: number) {
+  return new Intl.NumberFormat("en-NG").format(price);
+}
 
 function CourseCard({ course }: CourseCardProps) {
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-[2rem] border border-border bg-white transition duration-300 hover:-translate-y-2 hover:border-primary/40 hover:shadow-2xl hover:shadow-slate-200/70">
-      {/* Illustration area */}
-      <div className="relative h-56 overflow-hidden bg-primary-light">
-        <div className="absolute -right-12 -top-12 h-40 w-40 rounded-full border-[25px] border-white/60" />
+    <motion.article
+      layout
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -7 }}
+      transition={{ duration: 0.25 }}
+      className="group overflow-hidden rounded-[2rem] border border-border bg-white shadow-sm transition-shadow duration-300 hover:shadow-2xl hover:shadow-slate-200/70"
+    >
+      {/* Illustration */}
+      <div className="relative h-[280px] overflow-hidden bg-primary-light">
+        {/* Decorative blobs */}
+        <div className="absolute -right-20 -top-20 h-52 w-52 rounded-full bg-white/60 blur-2xl" />
 
-        <div className="absolute left-6 top-6 flex gap-2">
-          {course.technology.slice(0, 3).map((technology) => (
+        <div className="absolute -bottom-20 -left-16 h-48 w-48 rounded-full bg-sky-200/40 blur-2xl" />
+
+        {/* Course category */}
+        <div className="absolute left-5 top-5 z-10 rounded-full border border-white/70 bg-white/90 px-3 py-1.5 text-xs font-bold text-primary-dark shadow-sm backdrop-blur">
+          {course.category}
+        </div>
+
+        <div className="absolute inset-0 flex items-center justify-center p-5 transition-transform duration-500 group-hover:scale-[1.04]">
+          <CourseIllustration type={course.illustration} />
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="p-6 sm:p-7">
+        {/* Technology */}
+        <div className="flex flex-wrap gap-2">
+          {course.technologies.map((technology) => (
             <span
               key={technology}
-              className="rounded-full bg-white/80 px-3 py-1 text-[10px] font-semibold text-dark backdrop-blur"
+              className="rounded-lg bg-surface px-2.5 py-1 text-[11px] font-semibold text-muted"
             >
               {technology}
             </span>
           ))}
         </div>
 
-        <div className="absolute inset-x-0 bottom-0 flex items-end justify-center">
-          <div className="relative mb-[-1px] flex h-36 w-56 items-center justify-center rounded-t-[5rem] bg-white shadow-lg">
-            <div
-              className={`flex h-20 w-20 items-center justify-center rounded-3xl font-heading text-2xl font-bold shadow-lg ${logoStyles[course.accent]}`}
-            >
-              {course.accent === "python" && "Py"}
-              {course.accent === "web" && "</>"}
-              {course.accent === "kotlin" && "K"}
-            </div>
-
-            <div className="absolute left-5 top-8 h-3 w-3 rounded-full bg-primary" />
-            <div className="absolute right-6 top-12 h-2.5 w-2.5 rounded-full bg-primary-dark" />
-          </div>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="flex flex-1 flex-col p-7">
-        <div className="flex items-center justify-between gap-3">
-          <span className="text-xs font-bold uppercase tracking-[0.14em] text-primary-dark">
-            {course.category}
-          </span>
-
-          <span className="rounded-full bg-slate-50 px-3 py-1 text-xs font-semibold text-muted">
-            {course.level}
-          </span>
-        </div>
-
-        <h2 className="mt-5 font-heading text-2xl font-bold leading-tight text-dark">
+        <h3 className="mt-5 font-heading text-2xl font-bold leading-tight text-dark">
           {course.title}
-        </h2>
+        </h3>
 
-        <p className="mt-4 text-sm leading-6 text-muted">
+        <p className="mt-3 line-clamp-3 text-sm leading-6 text-muted">
           {course.description}
         </p>
 
-        <div className="mt-6 flex flex-wrap gap-4 border-t border-border pt-5 text-sm text-muted">
-          <span className="flex items-center gap-2">
-            <Clock3 size={16} className="text-primary-dark" />
+        {/* Course meta */}
+        <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-border pt-5">
+          <div className="flex items-center gap-2 text-xs font-semibold text-muted">
+            <Clock3 size={15} className="text-primary-dark" />
             {course.duration}
-          </span>
+          </div>
 
-          <span className="flex items-center gap-2">
-            <Layers3 size={16} className="text-primary-dark" />
-            Practical
-          </span>
+          <div className="flex items-center gap-2 text-xs font-semibold text-muted">
+            <Sparkles size={15} className="text-primary-dark" />
+            {course.level}
+          </div>
         </div>
 
-        <div className="mt-auto flex items-end justify-between gap-5 pt-7">
+        {/* Bottom */}
+        <div className="mt-7 flex items-end justify-between gap-4">
           <div>
-            <p className="text-xs text-muted">Course fee</p>
+            <p className="text-xs font-medium text-muted">Course fee</p>
 
             <p className="mt-1 font-heading text-2xl font-bold text-dark">
-              ₦{course.price.toLocaleString()}
+              ₦{formatPrice(course.price)}
             </p>
           </div>
 
           <Link
             to={`/courses/${course.slug}/apply`}
-            className="inline-flex items-center gap-2 rounded-xl bg-dark px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary-dark"
+            className="inline-flex items-center gap-2 rounded-xl bg-primary-dark px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-primary-bright"
           >
-            Apply now
+            Enroll now
             <ArrowRight size={16} />
           </Link>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }
 

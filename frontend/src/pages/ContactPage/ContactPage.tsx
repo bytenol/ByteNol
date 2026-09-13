@@ -8,6 +8,7 @@ import ContactCTA from "./components/ContactCTA";
 import ContactSocials from "./components/ContactSocials";
 
 function ContactPage() {
+
 	return (
 		<>
 			<SEO
