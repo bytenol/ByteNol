@@ -13,10 +13,10 @@ interface ContactTopicsProps {
 }
 
 const icons = {
-	learning: GraduationCap,
-	software: Code2,
-	automation: Settings,
-	business: BriefcaseBusiness,
+	learn: GraduationCap,
+	build: Code2,
+	automate: Settings,
+	solution: BriefcaseBusiness,
 	general: HelpCircle,
 };
 
@@ -31,13 +31,13 @@ function ContactTopics({
 			</label>
 
 			<div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
-				{enquiryTopics.map((topic) => {
-					const Icon = icons[topic.id as keyof typeof icons];
+				{enquiryTopics.map((topic, index) => {
+					const Icon = icons[(topic.id as string).toLocaleLowerCase() as keyof typeof icons];
 					const selected = selectedTopic === topic.id;
 
 					return (
 						<button
-							key={topic.id}
+							key={index}
 							type="button"
 							onClick={() => onSelect(topic.id)}
 							className={`group rounded-2xl border p-4 text-left transition-all duration-200 ${selected

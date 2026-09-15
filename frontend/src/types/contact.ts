@@ -1,4 +1,4 @@
-export type contact_choice_t = "LEARN" | "BUILD" | "GENERAL"
+export type contact_choice_t = "LEARN" | "BUILD" | "GENERAL" | "SOLUTION" | "AUTOMATE"
 
 
 export interface iContact {

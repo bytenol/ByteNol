@@ -16,7 +16,13 @@ export async function apiClient<T>(endpoint: string, options: ApiOptions = {}): 
 	const { headers, skipAuthRefresh = false, ...requestOptions } = options;
 
 	let response = await makeRequest(endpoint, requestOptions);
-    
+    let errMessage = "";
+
+    if(!response.ok) {
+        errMessage = response.statusText;
+        throw new Error(errMessage);
+        
+    }
     
 	return response.json();
 }
@@ -46,6 +52,7 @@ async function makeRequest(endpoint: string, options: RequestInit): Promise<Resp
     return fetch(`${API_URL}${endpoint}`, 
         {
 		...requestOptions,
+        
 		headers: {
 			"Content-Type": "application/json",
 			...headers,

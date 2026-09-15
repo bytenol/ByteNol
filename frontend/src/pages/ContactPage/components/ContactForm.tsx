@@ -1,17 +1,19 @@
 import { useState, type FormEvent } from "react";
 import { ArrowRight, LoaderCircle, Send } from "lucide-react";
-import { motion } from "motion/react";
 
 import ContactTopics from "./ContactTopics";
 import type { contact_choice_t, iContact } from "../../../types/contact";
 import { createContactReq } from "../contactApi";
+import { useSnackbar } from "../../../context/SnackbarContext";
+import { motion } from "motion/react";
 
 
 function ContactForm() {
 	const [selectedTopic, setSelectedTopic] = useState("");
 	const [loading, setLoading] = useState(false);
-	// const [error, setError] = useState("");
 	const [submitted, setSubmitted] = useState(false);
+
+	const {showSnackbar} = useSnackbar();
 
 	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
@@ -32,17 +34,15 @@ function ContactForm() {
 			const response = await createContactReq(body);
 			if(response.error) {
 				setLoading(false);
-				// setError(response.error);
+				showSnackbar(response.error, "error");
 				return;
 			}
-			console.log("submitted successfully");
+			showSnackbar("Message sent successfully", "success");
+			setSubmitted(true);
 		} catch(err) {
-			console.log("somethinf went wrong");
+			showSnackbar("Something went wrong", "error");
 		}
-		
-
 		setLoading(false);
-		setSubmitted(true);
 	}
 
 	if (submitted) {
@@ -175,7 +175,7 @@ function ContactForm() {
 					onSelect={setSelectedTopic}
 				/>
 
-				<input type="hidden" name="choice" value={selectedTopic} />
+				<input type="hidden" name="choice" value={selectedTopic as contact_choice_t} />
 			</div>
 
 			<div className="mt-7">

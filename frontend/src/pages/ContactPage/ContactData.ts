@@ -53,27 +53,27 @@ export const socialLinks = [
 
 export const enquiryTopics = [
 	{
-		id: "learning",
+		id: "LEARN",
 		title: "Learn with ByteNol",
 		description: "Courses, mentorship and practical learning.",
 	},
 	{
-		id: "software",
+		id: "BUILD",
 		title: "Build software",
 		description: "Turn an idea or business need into software.",
 	},
 	{
-		id: "automation",
+		id: "AUTOMATE",
 		title: "Automate work",
 		description: "Reduce repetitive work with technology.",
 	},
 	{
-		id: "business",
+		id: "SOLUTION",
 		title: "Business solution",
 		description: "Technology solutions for your organization.",
 	},
 	{
-		id: "general",
+		id: "GENERAL",
 		title: "General enquiry",
 		description: "Something else? We're listening.",
 	},

@@ -40,7 +40,8 @@ function CourseCard({ course }: CourseCardProps) {
         </div>
 
         <div className="absolute inset-0 flex items-center justify-center p-5 transition-transform duration-500 group-hover:scale-[1.04]">
-          <CourseIllustration type={course.illustration} />
+          {/* <CourseIllustration type={course.illustration} /> */}
+          <img src="./FrontendIllustration.svg" />
         </div>
       </div>
 
