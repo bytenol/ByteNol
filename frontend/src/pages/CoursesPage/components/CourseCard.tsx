@@ -85,9 +85,9 @@ function CourseCard({ course }: CourseCardProps) {
           <div>
             <p className="text-xs font-medium text-muted">Course fee</p>
 
-            <p className="mt-1 font-heading text-2xl font-bold text-dark">
+            {/* <p className="mt-1 font-heading text-2xl font-bold text-dark">
               ₦{formatPrice(course.price)}
-            </p>
+            </p> */}
           </div>
 
           <Link
