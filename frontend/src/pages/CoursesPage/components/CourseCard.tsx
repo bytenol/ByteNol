@@ -13,9 +13,9 @@ interface CourseCardProps {
   course: Course;
 }
 
-function formatPrice(price: number) {
-  return new Intl.NumberFormat("en-NG").format(price);
-}
+// function formatPrice(price: number) {
+//   return new Intl.NumberFormat("en-NG").format(price);
+// }
 
 function CourseCard({ course }: CourseCardProps) {
   return (
