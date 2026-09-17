@@ -6,22 +6,21 @@ import SocialIcon from "../common/SocialIcon";
 
 const learnLinks = [
     { label: "Courses", to: "/courses" },
-    { label: "Learning Paths", to: "/learning-paths" },
-    { label: "Projects", to: "/projects" },
-    { label: "Mentorship", to: "/mentorship" },
+    // { label: "Learning Paths", to: "/learning-paths" },
+    // { label: "Projects", to: "/projects" },
+    // { label: "Mentorship", to: "/mentorship" },
 ];
 
 const buildLinks = [
-    { label: "Custom Software", to: "/solutions/software" },
-    { label: "Business Systems", to: "/solutions/business-systems" },
-    { label: "Technology Consulting", to: "/solutions/consulting" },
+    // { label: "Custom Software", to: "/solutions/software" },
+    // { label: "Business Systems", to: "/solutions/business-systems" },
+    // { label: "Technology Consulting", to: "/solutions/consulting" },
     { label: "Our Products", to: "/products" },
 ];
 
 const companyLinks = [
-    { label: "About ByteNol", to: "/about" },
-    { label: "Resources", to: "/resources" },
-    { label: "Contact", to: "/contact" },
+    { label: "About Us", to: "/about" },
+    { label: "Our Resources", to: "/resources" },
 ];
 
 const legalLinks = [
@@ -53,8 +52,8 @@ function Footer() {
                         <p className="mt-6 text-sm leading-7 text-slate-400">
                             Learn technology. Build what matters.
                             <br />
-                            ByteNol helps people develop practical
-                            technology skills and helps organizations
+                            We helps you develop practical
+                            technology skills and also can help your organizations
                             build better software.
                         </p>
 
@@ -70,15 +69,7 @@ function Footer() {
                             </a>
 
                             <a
-                                href="#"
-                                aria-label="ByteNol on LinkedIn"
-                                className="flex h-10 w-10 items-center justify-center rounded-xl text-slate-400 transition-colors hover:border-primary/30 hover:bg-primary/10 hover:text-primary"
-                            >
-                                <SocialIcon platform="youtube" />
-                            </a>
-
-                            <a
-                                href="#"
+                                href="https://www.instagram.com/bytenol_cp"
                                 aria-label="ByteNol on Instagram"
                                 className="flex h-10 w-10 items-center justify-center rounded-xl text-slate-400 transition-colors hover:border-primary/30 hover:bg-primary/10 hover:text-primary"
                             >
@@ -93,13 +84,13 @@ function Footer() {
                                 <SocialIcon platform="x" />
                             </a>
 
-                            <a
+                            {/* <a
                                 href="#"
                                 aria-label="ByteNol on Facebook"
                                 className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 text-slate-400 transition-colors hover:border-primary/30 hover:bg-primary/10 hover:text-primary"
                             >
                                 <SocialIcon platform="facebook" />
-                            </a>
+                            </a> */}
                         </div>
 
                     </div>

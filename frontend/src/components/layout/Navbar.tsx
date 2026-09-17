@@ -11,18 +11,18 @@ const navItems = [
 		label: "Learn",
 		links: [
 			{ label: "Courses", to: "/courses" },
-			{ label: "Learning Paths", to: "/learning-paths" },
-			{ label: "Projects", to: "/projects" },
+			// { label: "Learning Paths", to: "/learning-paths" },
+			// { label: "Projects", to: "/projects" },
 		],
 	},
-	{
-		label: "Solutions",
-		links: [
-			{ label: "Custom Software", to: "/solutions/software" },
-			{ label: "Business Systems", to: "/solutions/business-systems" },
-			{ label: "Technology Consulting", to: "/solutions/consulting" },
-		],
-	},
+	// {
+	// 	label: "Solutions",
+	// 	links: [
+	// 		{ label: "Custom Software", to: "/solutions/software" },
+	// 		{ label: "Business Systems", to: "/solutions/business-systems" },
+	// 		{ label: "Technology Consulting", to: "/solutions/consulting" },
+	// 	],
+	// },
 ];
 
 const simpleLinks = [
@@ -86,8 +86,8 @@ function Navbar() {
 										<ChevronDown
 											size={15}
 											className={`transition-transform duration-200 ${openDropdown === item.label
-													? "rotate-180"
-													: ""
+												? "rotate-180"
+												: ""
 												}`}
 										/>
 									</button>
@@ -163,16 +163,20 @@ function Navbar() {
 
 						{/* Desktop actions */}
 						<div className="hidden items-center gap-3 lg:flex">
-							<Link
+							{/* <Link
 								to="/login"
 								className="px-3 py-2 text-sm font-semibold text-dark transition-colors hover:text-primary-dark"
 							>
 								Sign in
+							</Link> */}
+							<Link
+								to="/courses"
+								onClick={closeMobileMenu}
+							>
+								<Button className="mt-2 w-full">
+									Start Learning
+								</Button>
 							</Link>
-
-							<Button className="rounded-xl px-4 py-2.5">
-								Start Learning
-							</Button>
 						</div>
 
 						{/* Mobile menu button */}
@@ -222,8 +226,8 @@ function Navbar() {
 												<ChevronDown
 													size={17}
 													className={`transition-transform ${openDropdown === item.label
-															? "rotate-180"
-															: ""
+														? "rotate-180"
+														: ""
 														}`}
 												/>
 											</button>
@@ -273,20 +277,23 @@ function Navbar() {
 									))}
 
 									<div className="mt-2 border-t border-border/70 pt-3">
-										<Link
+										{/* <Link
 											to="/login"
 											onClick={closeMobileMenu}
 											className="block rounded-xl px-3 py-3 text-sm font-semibold text-dark"
 										>
 											Sign in
-										</Link>
+										</Link> */}
 
-										<Button
-											className="mt-2 w-full"
+										<Link
+											to="/courses"
 											onClick={closeMobileMenu}
+											className="block rounded-xl px-3 py-3 text-sm font-semibold text-dark"
 										>
-											Start Learning
-										</Button>
+											<Button className="mt-2 w-full">
+												Start Learning
+											</Button>
+										</Link>
 									</div>
 								</div>
 							</motion.div>

@@ -15,7 +15,7 @@ function ContactSocials() {
 	return (
 		<div className="mt-10">
 			<p className="font-heading text-xl font-bold text-dark">
-				Follow ByteNol
+				Follow Us
 			</p>
 
 			<p className="mt-2 text-sm leading-6 text-muted">

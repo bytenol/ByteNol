@@ -1,9 +1,10 @@
-import { ArrowDown, ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { motion } from "motion/react";
 
 import Container from "../../../components/common/Container";
 import ContactGirlIllustration from "./ContactGirlIllustration";
 import Button from "../../../components/ui/Button";
+
 
 function ContactHero() {
 	return (
@@ -73,18 +74,7 @@ function ContactHero() {
 								className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5"
 							>
 								<Button className="rounded-xl hover:bg-primary-bright shadow-lg shadow-sky-200 ">
-									Start Learning <ArrowRight size={18} />
-								</Button>
-							</a>
-
-							<a
-								href="#contact-options"
-								className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-dark transition-all hover:border-primary-dark hover:text-primary-dark"
-							>
-
-
-								<Button className="rounded-xl shadow-lg shadow-black-200" variant="dark">
-									Explore ways to reach us <ArrowDown size={17} />
+									Message us directly <ArrowRight size={18} />
 								</Button>
 							</a>
 						</div>
