@@ -1,6 +1,4 @@
 import { motion } from "motion/react";
-import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
 
 import Container from "../../../components/common/Container";
 import ProductsHeroIllustration from "./ProductsHeroIllustration";
@@ -67,15 +65,5 @@ function ProductsHero() {
 		</section>
 	);
 }
-
-
-const ProductArtWork = () => {
-	return(
-		<div className="bg-red-900 w-100 h-100">
-
-		</div>
-	)
-}
-
 
 export default ProductsHero;
