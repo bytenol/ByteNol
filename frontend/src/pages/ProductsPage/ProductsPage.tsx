@@ -12,9 +12,10 @@ function ProductsPage() {
 	return (
 		<>
 			<SEO
-				title="Software Products | ByteNol"
+				title="Products | ByteNol"
 				description="Explore software products built by ByteNol to help schools, businesses and individuals solve real-world problems with technology."
 			/>
+			
 			<ProductsHero />
 
 			<ProductCategories />
