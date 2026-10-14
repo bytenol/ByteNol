@@ -5,23 +5,38 @@ import Container from "../common/Container";
 import SocialIcon from "../common/SocialIcon";
 
 const learnLinks = [
-    { label: "Courses", to: "/courses" },
-    // { label: "Learning Paths", to: "/learning-paths" },
-    // { label: "Projects", to: "/projects" },
-    // { label: "Mentorship", to: "/mentorship" },
+    { label: "Scratch", to: "#"},
+    { label: "Data Science", to: "#"},
+    { label: "Cybesecurity", to: "#"},
+    { label: "Vibe Coding", to: "#"},
+    { label: "Game development", to: "#"},
+    { label: "Machine Learning", to: "#"},
+    { label: "Artificial Intelligence", to: "#"},
+    { label: "Artificial Intelligence", to: "#"},
+    { label: "Android app development", to: "#"},
+    { label: "IOS app development", to: "#"},
+    { label: "Desktop app development", to: "#"},
+    { label: "Android app development", to: "#"},
+    { label: "Mobile app with flutter", to: "#"},
+    { label: "Android app development", to: "#"},
+    { label: "Fullstack development with python", to: "#"},
+    { label: "Fullstack development with nodejs", to: "#"},
 ];
 
 const buildLinks = [
-    // { label: "Custom Software", to: "/solutions/software" },
-    // { label: "Business Systems", to: "/solutions/business-systems" },
-    // { label: "Technology Consulting", to: "/solutions/consulting" },
-    { label: "Our Products", to: "/products" },
+    { label: "School Portal", to: "" },
+    { label: "ExamSuite", to: "" },
+    { label: "Vytrix", to: "" },
+    { label: "AceOlevel", to: "" },
+    { label: "Pygame Studio", to: "" },
 ];
 
 const companyLinks = [
     { label: "About Us", to: "/about" },
-    { label: "Our Resources", to: "/resources" },
+    { label: "Our Products", to: "/products" },
+    { label: "Our Courses", to: "/courses" },
 ];
+
 
 const legalLinks = [
     { label: "Privacy Policy", to: "/privacy" },
@@ -115,19 +130,15 @@ function Footer() {
                         </ul>
                     </div>
 
-                    {/* Build */}
                     <div>
                         <h3 className="font-heading text-sm font-semibold">
-                            Build
+                            Solutions
                         </h3>
 
                         <ul className="mt-5 space-y-3">
                             {buildLinks.map((link) => (
                                 <li key={link.to}>
-                                    <Link
-                                        to={link.to}
-                                        className="text-sm text-slate-400 transition-colors hover:text-white"
-                                    >
+                                    <Link to={link.to} className="text-sm transition-colors">
                                         {link.label}
                                     </Link>
                                 </li>

@@ -4,15 +4,16 @@ import { Link } from "react-router-dom";
 
 import Container from "../../../components/common/Container";
 import CodeWindow from "./CodeWindow";
+import Button from "../../../components/ui/Button";
 
 function Hero() {
 	return (
-		<section className="relative overflow-hidden bg-white">
+		<section className="relative overflow-hidden">
 			{/* Background decoration */}
 			<div className="pointer-events-none absolute inset-0">
-				<div className="absolute left-[45%] top-0 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-primary-light/60 blur-3xl" />
+				<div className="absolute left-[45%] top-0 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-primary-brown-dark/20 blur-3xl" />
 
-				<div className="absolute -right-40 top-20 h-80 w-80 rounded-full border-[50px] border-primary-light/50" />
+				<div className="absolute -right-40 top-20 h-80 w-80 rounded-full border-[50px] border-primary-brown-dark/50" />
 
 				<div className="absolute -left-32 bottom-0 h-64 w-64 rounded-full border-[35px] border-primary-light/40" />
 
@@ -36,9 +37,9 @@ function Hero() {
 							transition={{ duration: 0.5 }}
 							className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary-dark/10 bg-primary-light px-3 py-1.5"
 						>
-							<span className="h-2 w-2 rounded-full bg-primary-dark" />
+							<span className="h-2 w-2 rounded-full bg-primary-brown-dark" />
 
-							<span className="text-xs font-semibold text-primary-dark sm:text-sm">
+							<span className="text-xs font-semibold text-primary-brown-dark sm:text-sm">
 								Technology • Education • Innovation
 							</span>
 						</motion.div>
@@ -55,7 +56,7 @@ function Hero() {
 							Learn to Build.
 							<br />
 
-							<span className="text-primary-dark">
+							<span className="text-primary-brown-dark font-bold">
 								We Help You Build.
 							</span>
 						</motion.h1>
@@ -67,7 +68,7 @@ function Hero() {
 								duration: 0.6,
 								delay: 0.25,
 							}}
-							className="mt-7 max-w-xl text-base leading-7 text-muted sm:text-lg sm:leading-8"
+							className="mt-7 max-w-xl text-base leading-7 text-primary-brown-dark sm:text-lg sm:leading-8"
 						>
 							we help people develop real-world technology
 							skills and help organizations turn ideas into
@@ -85,18 +86,26 @@ function Hero() {
 						>
 							<Link
 								to="/courses"
-								className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary-dark px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-primary-bright hover:shadow-lg hover:shadow-sky-200"
 							>
-								Start Learning
-								<ArrowRight size={17} />
+								<Button className="mt-2 w-full">
+									Learn from us
+									<ArrowRight size={16} />
+								</Button>
 							</Link>
+
+							<Button className="mt-2 w-full">
+									Learn from us
+									<ArrowRight size={16} />
+								</Button>
 
 							<Link
 								to="/solutions"
 								className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-white px-6 py-3.5 text-sm font-semibold text-dark transition-all duration-200 hover:border-primary-dark hover:bg-primary-light"
 							>
-								<Play size={16} />
-								Work With Us
+								<Button className="">
+									Buy our Product
+									<ArrowRight size={16} />
+								</Button>
 							</Link>
 						</motion.div>
 
