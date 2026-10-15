@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 
-import Container from "../common/Container";
 import Button from "../ui/Button";
 
 const simpleLinks = [
@@ -15,8 +14,7 @@ const simpleLinks = [
 
 function Navbar() {
 	const [mobileOpen, setMobileOpen] = useState(false);
-	const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-	const [activeLink, setActiveLinnk] = useState("");
+	const [, setOpenDropdown] = useState<string | null>(null);
 
 	const closeMobileMenu = () => {
 		setMobileOpen(false);
