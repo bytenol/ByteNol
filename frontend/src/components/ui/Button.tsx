@@ -10,10 +10,10 @@ interface iButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variants: Record<btn_variant_t, string> = {
 	primary:
-		"bg-indigo-500 text-white hover:bg-indigo-600",
+		"bg-primary-500 text-white hover:bg-primary-600",
 
 	secondary:
-		"bg-dark text-white hover:bg-dark-soft",
+		"bg-secondary-500 text-white hover:bg-secondary-600",
 
 	outline:
 		"border border-indigo-500 bg-white text-indigo-500 hover:border-indigo-200 hover:text-black",
