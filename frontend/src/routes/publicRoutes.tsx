@@ -6,6 +6,7 @@ import ProductsPage from "../pages/ProductsPage/ProductsPage";
 import ResourcesPage from "../pages/ResourcesPage/ResourcesPage";
 import CoursesPage from "../pages/CoursesPage/CoursesPage";
 import ContactPage from "../pages/ContactPage/ContactPage";
+import CourseDetailPage from "../pages/CoursesPage/CourseDetailPage";
 
 
 const publicRoutes: RouteObject[] = [
@@ -32,6 +33,11 @@ const publicRoutes: RouteObject[] = [
     {
         path: "/courses",
         element: <CoursesPage />
+    },
+
+    {
+        path: "/courses/:courseName",
+        element: <CourseDetailPage />
     },
 
     {
