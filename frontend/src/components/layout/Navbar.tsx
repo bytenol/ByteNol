@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
@@ -15,14 +15,27 @@ const simpleLinks = [
 function Navbar() {
 	const [mobileOpen, setMobileOpen] = useState(false);
 	const [, setOpenDropdown] = useState<string | null>(null);
+	const [navBg, setNavBg] = useState("bg-background");
 
 	const closeMobileMenu = () => {
 		setMobileOpen(false);
 		setOpenDropdown(null);
 	};
 
+
+	useEffect(() => {
+		window.addEventListener("scroll", () => {
+			const { scrollY, innerHeight } = window;
+			if(scrollY > innerHeight && scrollY < innerHeight * 2) {
+				setNavBg("bg-white");
+			} else {
+				setNavBg("bg-background");
+			}
+		});
+	}, []);
+
 	return (
-		<header className="absolute sticky top-0 z-20 fira-sans-regular border-y-slate-300 bg-background">
+		<header className={`absolute sticky top-0 z-20 fira-sans-regular border-y-slate-300 ${navBg} transition-all duration-400`}>
 			<nav className="py-3 px-4">
 				<div
 					className="flex items-center justify-between"

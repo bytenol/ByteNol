@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { Link } from "react-router-dom";
 
 type btn_variant_t = "primary" | "secondary" | "outline" | "ghost" | "dark";
 
@@ -6,6 +7,7 @@ interface iButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	children: ReactNode;
 	variant?: btn_variant_t;
 	className?: string;
+	to?: string;
 }
 
 const variants: Record<btn_variant_t, string> = {
@@ -25,10 +27,11 @@ const variants: Record<btn_variant_t, string> = {
 		"bg-dark text-white hover:bg-dark-soft"
 };
 
-function Button({children, variant = "primary", className = "", ...props}: iButtonProps) {
+function Button({ children, to="", variant = "primary", className = "", ...props }: iButtonProps) {
 	return (
-		<button
-			className={`
+		<Link to={to}>
+			<button
+				className={`
         inline-flex items-center justify-center
         gap-2
         px-5 py-3
@@ -44,10 +47,11 @@ function Button({children, variant = "primary", className = "", ...props}: iButt
         ${variants[variant]}
         ${className}
       `}
-			{...props}
-		>
-			{children}
-		</button>
+				{...props}
+			>
+				{children}
+			</button>
+		</Link>
 	);
 }
 
