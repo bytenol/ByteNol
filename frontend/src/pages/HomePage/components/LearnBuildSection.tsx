@@ -9,7 +9,6 @@ import { motion, type Variants } from "motion/react";
 import Section from "../../../components/common/Section";
 import Button from "../../../components/ui/Button";
 
-// Animation Variants for repeatable slide-in / slide-out
 const slideUpVariant: Variants = {
 	hidden: { opacity: 0, y: 60, scale: 0.95 },
 	visible: { 
@@ -122,8 +121,6 @@ function ServiceCard({ type }: { type: "learn" | "build" }) {
 					<ArrowUpRight className="ml-1" size={18} />
 				</Button>
 			</div>
-
-			{/* Render Humanoid SVG Illustrations based on type */}
 			{learn ? <LearnIllustration /> : <BuildIllustration />}
 			
 		</article>

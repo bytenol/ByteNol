@@ -1,10 +1,10 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Search, SlidersHorizontal, BookX } from "lucide-react";
-import Container from "../../components/common/Container";
-import CourseCard from "./components/CourseCard";
+import Container from "../../../components/common/Container";
+import CourseCard from "../components/CourseCard";
 
-// --- Mock Course Data ---
+
 const coursesData = [
   {
     id: "fullstack",
@@ -171,7 +171,7 @@ const staggerContainer = {
   }
 };
 
-export default function CoursesPage() {
+export default function CourseListPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 

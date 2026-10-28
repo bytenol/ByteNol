@@ -4,9 +4,10 @@ import HomePage from "../pages/HomePage/HomePage";
 import AboutPage from "../pages/AboutPage/AboutPage";
 import ProductsPage from "../pages/ProductsPage/ProductsPage";
 import ResourcesPage from "../pages/ResourcesPage/ResourcesPage";
-import CoursesPage from "../pages/CoursesPage/CoursesPage";
 import ContactPage from "../pages/ContactPage/ContactPage";
-import CourseDetailPage from "../pages/CoursesPage/CourseDetailPage";
+import CourseDetailPage from "../features/courses/pages/CourseDetailPage";
+import AuthPage from "../pages/AuthPage/AuthPage";
+import CourseListPage from "../features/courses/pages/CourseListPage";
 
 
 const publicRoutes: RouteObject[] = [
@@ -32,7 +33,7 @@ const publicRoutes: RouteObject[] = [
 
     {
         path: "/courses",
-        element: <CoursesPage />
+        element: <CourseListPage />
     },
 
     {
@@ -43,6 +44,11 @@ const publicRoutes: RouteObject[] = [
     {
         path: "/contact",
         element: <ContactPage />
+    },
+
+    {
+        path: "auth",
+        element: <AuthPage />
     }
 ];
 
