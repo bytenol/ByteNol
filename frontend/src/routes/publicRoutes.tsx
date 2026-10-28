@@ -47,7 +47,7 @@ const publicRoutes: RouteObject[] = [
     },
 
     {
-        path: "auth",
+        path: "auth/:formType",
         element: <AuthPage />
     }
 ];

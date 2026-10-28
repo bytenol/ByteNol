@@ -165,10 +165,10 @@ function NavTextLink({ to, label, onClick, className = "" }: iNavTextLink) {
 function AuthButton() {
 	return (
 		<>
-			<Button variant="outline">
+			<Button variant="outline" to="auth/login">
 				Log In
 			</Button>
-			<Button variant="primary">
+			<Button variant="primary" to="auth/signup">
 				Register
 			</Button>
 		</>

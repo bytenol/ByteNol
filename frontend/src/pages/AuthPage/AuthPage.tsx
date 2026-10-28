@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence, type Variants } from "motion/react";
 import { Mail, Lock, User, ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { useParams } from "react-router-dom";
 
 // --- Animation Variants ---
 const formVariants: Variants = {
@@ -15,9 +16,15 @@ const staggerContainer = {
 };
 
 export default function AuthPage() {
+  const { formType } = useParams();
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", password: "" });
+
+  useEffect(() => {
+    setIsLogin(formType != "signup");
+
+  }, [formType]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
