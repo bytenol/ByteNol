@@ -66,6 +66,7 @@ media/
 .env
 .env.*
 !.env.example
+licensing_private_key.pem
 
 
 # =========================

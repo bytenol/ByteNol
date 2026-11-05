@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework_simplejwt.token_blacklist',
     'django_filters',
+    'cryptography',
 
     'account.apps.AccountConfig',
     'contact.apps.ContactConfig',
@@ -258,3 +259,12 @@ SIMPLE_JWT = {
 
 FLUTTERWAVE_SECRET_KEY = os.environ.get("FLUTTERWAVE_SECRET_KEY")
 FLUTTERWAVE_SECRET_HASH = os.environ.get("FLUTTERWAVE_SECRET_HASH")
+
+LICENSING_PRIVATE_KEY_B64 = os.environ.get(
+    "LICENSING_PRIVATE_KEY_B64"
+)
+
+LICENSING_KEY_ID = os.environ.get(
+    "LICENSING_KEY_ID",
+    "bytenol-ed25519-2026-01"
+)
