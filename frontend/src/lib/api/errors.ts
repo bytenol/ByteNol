@@ -1,21 +1,16 @@
 export class ApiError extends Error {
-  public readonly status: number;
-  public readonly data: unknown;
-  public readonly headers: Headers;
+	public readonly status: number;
+	public readonly data: unknown;
+	public readonly headers: Headers;
 
-  constructor(
-    message: string,
-    status: number,
-    data: unknown,
-    headers: Headers
-  ) {
-    super(message);
+	constructor(message: string, status: number, data: unknown, headers: Headers) {
+		super(message);
 
-    this.name = "ApiError";
-    this.status = status;
-    this.data = data;
-    this.headers = headers;
+		this.name = "ApiError";
+		this.status = status;
+		this.data = data;
+		this.headers = headers;
 
-    Object.setPrototypeOf(this, ApiError.prototype);
-  }
+		Object.setPrototypeOf(this, ApiError.prototype);
+	}
 }

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, type Variants } from "motion/react";
 import { Mail, Lock, User, ArrowRight, ArrowLeft, Phone, AlertCircle } from "lucide-react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import type { iAuthForm } from "../auth.types";
+import { loginReq, registerReq } from "../auth.api";
+import type { ApiError } from "../../../lib/api";
 
 const formVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
@@ -20,6 +22,8 @@ export default function AuthPage() {
     const [isLogin, setIsLogin] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const [showVerification, setShowVerification] = useState(false);
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState<iAuthForm>({
         first_name: "",
@@ -78,27 +82,27 @@ export default function AuthPage() {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async(e: React.FormEvent) => {
         e.preventDefault();
         
         if (!validateForm()) return;
 
-		console.log(formData);
-
         setIsLoading(true);
-
-        // Simulate API authentication call
-        // setTimeout(() => {
-        //     setIsLoading(false);
-        //     if (!isLogin) {
-        //         // Show verification UI on successful signup
-        //         setShowVerification(true);
-        //     } else {
-        //         // Handle successful login (e.g., redirect to dashboard)
-        //         console.log("Logged in successfully");
-        //     }
-        // }, 1500);
-		setIsLoading(false);
+        setError("");
+        try {
+            // signup
+            if(!isLogin) {
+                await registerReq(formData);
+                setShowVerification(true);
+            } else {
+                await loginReq(formData);
+                navigate("/dahsboard", { replace: true });
+            }
+        } catch(err) {
+            setError((err as ApiError).message);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -191,6 +195,14 @@ export default function AuthPage() {
 
                             {/* Form Area */}
                             <form onSubmit={handleSubmit} className="space-y-5">
+
+                                {
+                                    error && (
+                                    <div className="bg-red-300 w-full p-2 rounded-xl text-red-900">
+                                        {error}
+                                    </div>
+                                    )
+                                }
                                 
                                 {!isLogin && (
                                     <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="grid grid-cols-2 gap-4">
