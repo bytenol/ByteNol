@@ -43,7 +43,7 @@ const legalLinks = [
     { label: "Terms of Service", to: "/terms" },
 ];
 
-function Footer() {
+function PublicFooter() {
     return (
         <footer className="bg-dark text-white">
             <Container>
@@ -202,4 +202,4 @@ function Footer() {
     );
 }
 
-export default Footer;
+export default PublicFooter;

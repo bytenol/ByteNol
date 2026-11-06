@@ -1,17 +1,23 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../components/layout/Navbar";
-import Footer from "../components/layout/Footer";
 import ScrollToTop from "../components/common/ScrollToTop";
+import type { ReactNode } from "react";
 
-function PublicLayout() {
+
+interface iPublicLayoutProps {
+	header: ReactNode,
+	footer: ReactNode
+}
+
+
+function PublicLayout({ header, footer }: iPublicLayoutProps) {
 	return (
 		<div className="min-h-screen bg-background">
 			<ScrollToTop />
-			<Navbar />
+			{ header && header }
 			<main>
 				<Outlet />
 			</main>
-			<Footer />
+			{ footer && footer }
 		</div>
 	);
 }

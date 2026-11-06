@@ -4,8 +4,8 @@ import './index.css'
 import { RouterProvider } from 'react-router-dom'
 
 import router from './routes/AppRouter.tsx'
-import { ModalProvider } from './context/ModalContext.tsx'
-import { SnackbarProvider } from './context/SnackbarContext.tsx'
+import { ModalProvider } from './providers/ModalProvider.tsx'
+import { SnackbarProvider } from './providers/SnackbarProvider.tsx'
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>

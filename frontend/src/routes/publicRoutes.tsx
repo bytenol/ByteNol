@@ -6,50 +6,57 @@ import ProductsPage from "../pages/ProductsPage/ProductsPage";
 import ResourcesPage from "../pages/ResourcesPage/ResourcesPage";
 import ContactPage from "../pages/ContactPage/ContactPage";
 import CourseDetailPage from "../features/courses/pages/CourseDetailPage";
-import AuthPage from "../pages/AuthPage/AuthPage";
 import CourseListPage from "../features/courses/pages/CourseListPage";
+import { authRoutes } from "../features/auth/auth.routes";
+import PublicLayout from "../layout/PublicLayout";
+import PublicNavbar from "../components/layout/PublicNavbar";
+import PublicFooter from "../components/layout/PublicFooter";
 
 
 const publicRoutes: RouteObject[] = [
     {
-        index: true,
-        element: <HomePage />
+        path: "",
+        element: <PublicLayout header={<PublicNavbar />} footer={<PublicFooter />} />,
+        children: [
+            {
+                index: true,
+                element: <HomePage />
+            },
+
+            {
+                path: "/about",
+                element: <AboutPage />
+            },
+
+            {
+                path: "/products",
+                element: <ProductsPage />
+            },
+
+            {
+                path: "/resources",
+                element: <ResourcesPage />
+            },
+
+            {
+                path: "/courses",
+                element: <CourseListPage />
+            },
+
+            {
+                path: "/courses/:courseName",
+                element: <CourseDetailPage />
+            },
+
+            {
+                path: "/contact",
+                element: <ContactPage />
+            },
+
+        ]
     },
 
-    {
-        path: "/about",
-        element: <AboutPage />
-    },
-
-    {
-        path: "/products",
-        element: <ProductsPage />
-    },
-
-    {
-        path: "/resources",
-        element: <ResourcesPage />
-    },
-
-    {
-        path: "/courses",
-        element: <CourseListPage />
-    },
-
-    {
-        path: "/courses/:courseName",
-        element: <CourseDetailPage />
-    },
-
-    {
-        path: "/contact",
-        element: <ContactPage />
-    },
-
-    {
-        path: "auth/:formType",
-        element: <AuthPage />
-    }
+    ...authRoutes
 ];
 
 export default publicRoutes;

@@ -12,7 +12,7 @@ const simpleLinks = [
 	{ label: "Contact", to: "/contact" },
 ];
 
-function Navbar() {
+function PublicNavbar() {
 	const [mobileOpen, setMobileOpen] = useState(false);
 	const [, setOpenDropdown] = useState<string | null>(null);
 	const [navBg, setNavBg] = useState("bg-background");
@@ -175,4 +175,4 @@ function AuthButton() {
 	)
 }
 
-export default Navbar;
+export default PublicNavbar;
