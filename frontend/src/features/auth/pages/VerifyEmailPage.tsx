@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { motion, AnimatePresence, type Variants } from "motion/react";
 import { CheckCircle2, XCircle, Loader2, ArrowRight, Mail, ArrowLeft } from "lucide-react";
+import type { ApiError } from "../../../lib/api";
+import { verifyEmailReq } from "../auth.api";
+
 
 type VerificationStatus = "verifying" | "success" | "error";
 
@@ -28,23 +31,21 @@ export default function VerifyEmailPage() {
             return;
         }
 
-        const verifyEmail = async () => {
-            setStatus("verifying");
-            
-            // Simulate network delay
-            setTimeout(() => {
-                // In production, you would make your fetch/axios call here using uid and token
-                // For demonstration, we'll assume it succeeds:
-                setStatus("success");
-                
-                // If it were to fail, you would do:
-                // setStatus("error");
-                // setErrorMessage("This verification link has expired or has already been used.");
-            }, 2500);
-        };
-
-        verifyEmail();
+        verifyEmail(uid, token);
+        
     }, [searchParams]);
+
+    const verifyEmail = async(uid: string, token: string) => {
+        setStatus("verifying");
+        try {
+            // =3D ... 3d is not wanted as the str
+            await verifyEmailReq(uid, token);
+            setStatus("success");
+        } catch(err) {
+            setErrorMessage((err as ApiError).message);
+            setStatus("error");
+        }
+    }
 
     return (
         <div className="min-h-screen bg-surface relative flex items-center justify-center p-6 overflow-hidden">

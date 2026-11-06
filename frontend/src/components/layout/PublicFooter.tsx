@@ -117,8 +117,8 @@ function PublicFooter() {
                         </h3>
 
                         <ul className="mt-5 space-y-3">
-                            {learnLinks.map((link) => (
-                                <li key={link.to}>
+                            {learnLinks.map((link, i) => (
+                                <li key={link.to + i}>
                                     <Link
                                         to={link.to}
                                         className="text-sm text-slate-400 transition-colors hover:text-white"
@@ -136,8 +136,8 @@ function PublicFooter() {
                         </h3>
 
                         <ul className="mt-5 space-y-3">
-                            {buildLinks.map((link) => (
-                                <li key={link.to}>
+                            {buildLinks.map((link, i) => (
+                                <li key={link.to + i}>
                                     <Link to={link.to} className="text-sm transition-colors">
                                         {link.label}
                                     </Link>

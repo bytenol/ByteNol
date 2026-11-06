@@ -11,3 +11,18 @@ export const registerReq = async(body: iAuthForm) => {
 export const loginReq = async(body: Partial<iAuthForm>) => {
     return api.post<iAuthResponse>("auth/login/", body, { auth: false });
 }
+
+
+export const verifyEmailReq = async(uid: string, token: string) => {
+    return api.post<null>("auth/verify-email/", {
+        uid: uid,
+        token: token
+    }, { auth: false });
+}
+
+
+export const resendVerificationMailReq = async(email: string) => {
+    return api.post<null>("auth/resend-verification/", {
+        email
+    }, { auth: false })
+}
