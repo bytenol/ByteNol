@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'payments.apps.PaymentsConfig',
     'licensing.apps.LicensingConfig',
+    'dashboard.apps.DashboardConfig',
 ]
 
 MIDDLEWARE = [
