@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'django_filters',
     'cryptography',
+    "anymail",
 
     'account.apps.AccountConfig',
     'contact.apps.ContactConfig',
@@ -165,21 +166,22 @@ STORAGES = {
 # Email Configuration
 
 if DEBUG:
-    # Print emails in the terminal during local development.
-    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+    MAILERS = {
+        "default": {
+            "BACKEND": "django.core.mail.backends.console.EmailBackend",
+        }
+    }
 else:
-    # Send actual emails in production.
-    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    MAILERS = {
+        "default": {
+            "BACKEND": "anymail.backends.resend.EmailBackend",
+            "OPTIONS": {
+                "api_key": os.environ.get("RESEND_API_KEY"),
+            },
+        }
+    }
 
-    EMAIL_HOST = "smtp.gmail.com"
-    EMAIL_PORT = 587
-    EMAIL_USE_TLS = False
-    EMAIL_USE_SSL = True
-
-    EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
-    EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
-
-DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL")
+DEFAULT_FROM_EMAIL = "ByteNol <noreply@send.bytenol.com>"
 
 
 
