@@ -96,7 +96,7 @@ export default function AuthPage() {
                 setShowVerification(true);
             } else {
                 await loginReq(formData);
-                navigate("/dahsboard", { replace: true });
+                navigate("/dashboard", { replace: true });
             }
         } catch(err) {
             setError((err as ApiError).message);
