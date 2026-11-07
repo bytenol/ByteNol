@@ -2,7 +2,6 @@ import type { RouteObject } from "react-router-dom";
 
 import HomePage from "../pages/HomePage/HomePage";
 import AboutPage from "../pages/AboutPage/AboutPage";
-import ProductsPage from "../pages/ProductsPage/ProductsPage";
 import ResourcesPage from "../pages/ResourcesPage/ResourcesPage";
 import ContactPage from "../pages/ContactPage/ContactPage";
 import CourseDetailPage from "../features/courses/pages/CourseDetailPage";
@@ -26,11 +25,6 @@ const publicRoutes: RouteObject[] = [
             {
                 path: "/about",
                 element: <AboutPage />
-            },
-
-            {
-                path: "/products",
-                element: <ProductsPage />
             },
 
             {
