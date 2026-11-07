@@ -1,22 +1,12 @@
+import { refreshTokenReq } from "../../features/auth/auth.api";
+import { getAccessToken, getRefreshToken, setAccessToken, setRefreshToken } from "../../features/auth/auth.utils";
 import { ApiClient } from "./client";
 
 const VITE_API_URL = import.meta.env.VITE_API_URL;
 
-const VITE_ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
-
-const VITE_REFRESH_TOKEN = import.meta.env.VITE_REFRESH_TOKEN;
-
 
 if (!VITE_API_URL) {
     throw new Error("VITE_API_URL is not defined");
-}
-
-if(!VITE_ACCESS_TOKEN) {
-    throw new Error("VITE_ACCESS_TOKEN is not defined");
-}
-
-if(!VITE_REFRESH_TOKEN) {
-    throw new Error("VITE_REFRESH_TOKEN is not defined");
 }
 
 
@@ -29,29 +19,19 @@ export const api = new ApiClient({
         Accept: "application/json",
     },
 
-    getAccessToken: () => {
-        return localStorage.getItem(VITE_ACCESS_TOKEN);
-    },
+    getAccessToken: getAccessToken,
 
-    setAccessToken: (token: string) => {
-        localStorage.setItem(VITE_ACCESS_TOKEN, token);
-    },
+    getRefreshToken: getRefreshToken,
 
-    getRefreshToken: () => {
-        return localStorage.getItem(VITE_REFRESH_TOKEN);
-    },
+    onUnauthorized: async() => {
+        const refreshToken = getRefreshToken();
+        try {
+            const resp  = await refreshTokenReq(refreshToken as string);
+            setAccessToken(resp.access as string);
+            setRefreshToken(resp.refresh as string);
+        } catch {
+            // nothing to do here
+        }
 
-    setRefreshToken: (token: string) => {
-        localStorage.setItem(VITE_REFRESH_TOKEN, token);
-    },
-
-    clearAuthToken: () => {
-        localStorage.removeItem(VITE_ACCESS_TOKEN);
-        localStorage.removeItem(VITE_REFRESH_TOKEN); 
-    },
-
-    onUnauthorized: () => {
-        // JWT refresh and authentication handling
-        // will be implemented in the authentication layer.
     },
 });

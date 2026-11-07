@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import ScrollToTop from "../components/common/ScrollToTop";
 import type { ReactNode } from "react";
+import { useSession } from "../providers/SessionProvider";
 
 
 interface iPublicLayoutProps {
@@ -10,6 +11,13 @@ interface iPublicLayoutProps {
 
 
 function PublicLayout({ header, footer }: iPublicLayoutProps) {
+
+	const { isAuthLoading } = useSession();
+
+	if(isAuthLoading) {
+		return <p>Loading...</p>;
+	}
+
 	return (
 		<div className="min-h-screen bg-background">
 			<ScrollToTop />

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 
 import Button from "../ui/Button";
+import { useSession } from "../../providers/SessionProvider";
 
 const simpleLinks = [
 	{ label: "Learn", to: "/courses" },
@@ -16,6 +17,16 @@ function PublicNavbar() {
 	const [mobileOpen, setMobileOpen] = useState(false);
 	const [, setOpenDropdown] = useState<string | null>(null);
 	const [navBg, setNavBg] = useState("bg-background");
+
+	const { authenticatedUser, logout } = useSession();
+	const navigate = useNavigate();
+
+
+	const logoutUser = async() => {
+		await logout();
+		navigate("/auth/login");
+	}
+
 
 	const closeMobileMenu = () => {
 		setMobileOpen(false);
@@ -78,9 +89,16 @@ function PublicNavbar() {
 					</div>
 
 					<div className="flex items-center">
-
+							
 						<div className="hidden flex gap-2 lg:flex">
-							<AuthButton />
+							{
+								authenticatedUser ? 
+								<Button 
+									className="bg-red-900"
+									onClick={() => logoutUser()}
+								>Logout</Button> :
+								<AuthButton />
+							}
 						</div>
 
 						<button
@@ -121,9 +139,17 @@ function PublicNavbar() {
 									</NavTextLink>
 								))}
 
-								<div className="mt-2 border-t border-slate-500/70 pt-3 flex gap-2 items-center">
-									<AuthButton />
-								</div>
+								{
+									!authenticatedUser && (
+										<div className="mt-2 border-t border-slate-500/70 pt-3 flex gap-2 items-center">
+											{
+												authenticatedUser ? 
+												<Button onClick={() => logoutUser()}>Logout</Button> :
+												<AuthButton />
+											}
+										</div>
+									)
+								}
 							</div>
 						</motion.div>
 					)}

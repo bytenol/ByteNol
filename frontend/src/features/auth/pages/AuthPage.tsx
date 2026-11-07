@@ -3,8 +3,9 @@ import { motion, AnimatePresence, type Variants } from "motion/react";
 import { Mail, Lock, User, ArrowRight, ArrowLeft, Phone, AlertCircle } from "lucide-react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import type { iAuthForm } from "../auth.types";
-import { loginReq, registerReq } from "../auth.api";
+import { registerReq } from "../auth.api";
 import type { ApiError } from "../../../lib/api";
+import { useSession } from "../../../providers/SessionProvider";
 
 const formVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
@@ -24,6 +25,8 @@ export default function AuthPage() {
     const [showVerification, setShowVerification] = useState(false);
     const [error, setError] = useState("");
     const navigate = useNavigate();
+
+    const { login } = useSession();
 
     const [formData, setFormData] = useState<iAuthForm>({
         first_name: "",
@@ -95,8 +98,8 @@ export default function AuthPage() {
                 await registerReq(formData);
                 setShowVerification(true);
             } else {
-                await loginReq(formData);
-                navigate("/dashboard", { replace: true });
+                await login(formData);
+                navigate("/", { replace: true });
             }
         } catch(err) {
             setError((err as ApiError).message);

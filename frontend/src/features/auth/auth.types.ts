@@ -15,3 +15,8 @@ export interface iAuthResponse {
     access: string;
     user: iUser
 }
+
+
+export interface iMeResponse {
+    user: iUser
+}

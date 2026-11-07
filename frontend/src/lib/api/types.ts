@@ -44,19 +44,11 @@ export interface ApiClientConfig {
 		| undefined
 		| Promise<string | null | undefined>;
 
-
-	setAccessToken?: (token: string) => void;
-
 	getRefreshToken?: () =>
 		| string
 		| null
 		| undefined
 		| Promise<string | null | undefined>;
-
-
-	setRefreshToken?: (token: string) => void;
-
-	clearAuthToken?: () => void;
 
 	onUnauthorized?: () => void | Promise<void>;
 }
