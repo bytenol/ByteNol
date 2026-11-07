@@ -278,11 +278,6 @@ export default function AuthPage() {
                                 <div className="space-y-1.5">
                                     <div className="flex items-center justify-between">
                                         <label className="text-xs font-bold text-ink uppercase tracking-wider">Password</label>
-                                        {isLogin && (
-                                            <a href="#" className="text-xs font-bold text-brand-600 hover:text-brand-700 transition-colors">
-                                                Forgot password?
-                                            </a>
-                                        )}
                                     </div>
                                     <div className="relative">
                                         <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 ${errors.password ? 'text-red-500' : 'text-muted'}`} size={18} />
@@ -335,12 +330,22 @@ export default function AuthPage() {
                                 </button>
 
                                 {/* Terms / Disclaimer */}
-                                {!isLogin && (
+                                {!isLogin ? (
                                     <p className="text-center text-xs text-muted mt-6 max-w-xs mx-auto">
-                                        By creating an account, you agree to our <a href="#" className="font-bold text-brand-600 hover:underline">Terms of Service</a> and <a href="#" className="font-bold text-brand-600 hover:underline">Privacy Policy</a>.
+                                        By creating an account, you agree to our 
+                                            <a href="/terms" className="font-bold text-brand-600 hover:underline">Terms of Service</a> 
+                                            and <a href="/privacy" className="font-bold text-brand-600 hover:underline">Privacy Policy</a>.
                                     </p>
-                                )}
+                                ) : (
+                                    <p className="text-center text-xs text-muted mt-6 max-w-xs mx-auto">
+                                        Having touble signing in ? Click here <a href="/auth/reset" className="font-bold text-brand-600 hover:underline">here</a>.
+                                    </p>
+                                )
+                                }
+
+
                             </form>
+
                         </motion.div>
                     )}
                 </AnimatePresence>

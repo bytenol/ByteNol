@@ -197,8 +197,8 @@ REST_FRAMEWORK = {
         "anon": "10/min",
         "user": "100/min",
         "contact": "3/min",
-        "auth_verify": "10/hour",
-        "auth_resend_verification": "3/hour",
+        "auth_verify": "100/hour" if DEBUG else "10/hour",
+        "auth_resend_verification": "100/hour" if DEBUG else "3/hour",
     },
     "DEFAULT_THROTTLE_CLASSES": [
         "rest_framework.throttling.AnonRateThrottle",

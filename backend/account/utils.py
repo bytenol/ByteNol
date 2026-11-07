@@ -1,4 +1,6 @@
 
+from urllib.parse import urlencode
+
 from django.conf import settings
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
@@ -16,9 +18,13 @@ def send_verification_email(user):
         "http://localhost:5173",
     ).rstrip("/")
 
+    query_string = urlencode({
+        "uid": uid,
+        "token": token,
+    })
+
     verification_url = (
-        f"{frontend_url}/verify-email/"
-        f"?uid={uid}&token={token}"
+        f"{frontend_url}/verify-email/?{query_string}"
     )
 
     subject = "Verify your ByteNol account"
@@ -26,7 +32,7 @@ def send_verification_email(user):
     message = f"""
 Hello {user.first_name or "there"},
 
-Thank you for registering with ByteNol.
+Thank you for registering with ByteNol Tech. & Academy.
 
 Please verify your email address by opening the link below:
 
