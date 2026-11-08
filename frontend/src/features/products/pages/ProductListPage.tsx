@@ -1,88 +1,11 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence, type Variants } from "motion/react";
 import { Search } from "lucide-react";
 import Container from "../../../components/common/Container";
-import ProductCard from "../components/ProductCard";
+import { useCategory } from "../hooks/useCategory";
+import type { iCategory } from "../products.types";
+import AppLoader from "../../../components/common/AppLoader";
 
-
-// --- Mock Product Data ---
-const productsData = [
-	{
-		id: "examsuite",
-		title: "ExamSuite",
-		description: "A highly secure, offline Computer-Based Testing (CBT) platform designed for schools to conduct exams flawlessly over a LAN.",
-		category: "Education",
-		version: "v4.0",
-		badgeText: "Offline CBT",
-		bgClass: "bg-[#daf5b4] text-green-900", // Soft green matching references
-		graphic: (
-			<div className="relative w-[220px] h-[150px] bg-white rounded-xl shadow-[0_15px_30px_rgba(0,0,0,0.1)] transform -rotate-2 border border-green-100 flex items-center justify-center p-4">
-				{/* Using your provided ExamSuite icon */}
-				<img src="./examsuite-icon-1024.png" alt="ExamSuite" className="w-24 h-24 object-contain drop-shadow-xl z-10" />
-				<div className="absolute top-4 left-4 w-1/2 h-3 bg-green-100 rounded-full" />
-				<div className="absolute bottom-4 right-4 w-1/3 h-3 bg-green-100 rounded-full" />
-			</div>
-		)
-	},
-	{
-		id: "vytrix",
-		title: "Vytrix ERP",
-		description: "Intelligent Enterprise Resource Planning built to streamline finance, supply chain, and HR for growing organizations.",
-		category: "Enterprise",
-		version: "v2.1",
-		badgeText: "SaaS",
-		bgClass: "bg-[#d3caff] text-indigo-900", // Soft purple matching references
-		graphic: (
-			<div className="relative w-[240px] h-[160px] bg-white rounded-xl shadow-[0_15px_35px_rgba(0,0,0,0.15)] transform rotate-2 flex border border-indigo-100 overflow-hidden">
-				<div className="w-[30%] h-full bg-slate-900 p-4 flex flex-col gap-3">
-					<div className="w-full h-2 bg-slate-700 rounded-full" />
-					<div className="w-2/3 h-2 bg-slate-700 rounded-full" />
-				</div>
-				<div className="flex-1 flex items-center justify-center relative">
-					{/* Using your provided Vytrix icon */}
-					<img src="./vytrix-icon.svg" alt="Vytrix" className="w-20 h-20 object-contain drop-shadow-lg z-10" />
-				</div>
-			</div>
-		)
-	},
-	{
-		id: "schoolportal",
-		title: "EduCore Portal",
-		description: "An all-in-one student information system that connects administrators, teachers, students, and parents seamlessly.",
-		category: "Education",
-		version: "v3.5",
-		badgeText: "Web App",
-		bgClass: "bg-[#ffccaa] text-orange-900", // Soft orange matching references
-		graphic: (
-			<div className="relative w-[210px] h-[170px] bg-[#fffcf8] rounded-xl shadow-[0_15px_30px_rgba(234,88,12,0.15)] transform -rotate-1 border border-orange-200 grid grid-cols-3 grid-rows-3 p-5 gap-4">
-				{[...Array(9)].map((_, i) => (
-					<div key={i} className="flex items-center justify-center">
-						<div className={`w-6 h-6 rounded-md ${i === 4 ? 'bg-orange-400' : 'bg-orange-100'} border border-orange-200`} />
-					</div>
-				))}
-			</div>
-		)
-	},
-	{
-		id: "healthsync",
-		title: "HealthSync",
-		description: "Secure, HIPAA-compliant patient management software designed for modern clinics to handle bookings and EHR.",
-		category: "Healthcare",
-		version: "v1.2",
-		badgeText: "Desktop",
-		bgClass: "bg-[#bbf7d0] text-emerald-900",
-		graphic: (
-			<div className="relative w-[220px] h-[150px] bg-white rounded-xl shadow-lg transform rotate-2 border border-emerald-100 p-4 flex items-end gap-2">
-				<div className="w-1/4 h-1/4 bg-emerald-200 rounded-t-sm" />
-				<div className="w-1/4 h-1/2 bg-emerald-300 rounded-t-sm" />
-				<div className="w-1/4 h-3/4 bg-emerald-400 rounded-t-sm" />
-				<div className="w-1/4 h-full bg-emerald-500 rounded-t-sm" />
-			</div>
-		)
-	}
-];
-
-const CATEGORIES = ["All products", ...Array.from(new Set(productsData.map(p => p.category)))];
 
 // --- Animation Variants ---
 const staggerContainer = {
@@ -97,21 +20,21 @@ const fadeUp: Variants = {
 
 export default function ProductListPage() {
 	const [searchQuery, setSearchQuery] = useState("");
-	const [activeCategory, setActiveCategory] = useState("All products");
+	const [activeCategory, setActiveCategory] = useState<iCategory | null>(null);
 	const [isMac, setIsMac] = useState(false);
+
+	const { isLoading: categoryLoading, categories } = useCategory();
 
 	useEffect(() => {
 		setIsMac(navigator.platform.toUpperCase().indexOf('MAC') >= 0);
 	}, []);
 
-	const filteredProducts = useMemo(() => {
-		return productsData.filter(product => {
-			const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-				product.description.toLowerCase().includes(searchQuery.toLowerCase());
-			const matchesCategory = activeCategory === "All products" || product.category === activeCategory;
-			return matchesSearch && matchesCategory;
-		});
-	}, [searchQuery, activeCategory]);
+
+	const loading = categoryLoading;
+
+	if(loading) {
+		return <AppLoader />;
+	}
 
 	return (
 		<div className="min-h-screen bg-[#fafafa] pb-32">
@@ -182,16 +105,25 @@ export default function ProductListPage() {
 
 						{/* Filter Pills aligned to the right */}
 						<div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
-							{CATEGORIES.map(category => (
+							<button
+								onClick={() => setActiveCategory(null)}
+								className={`whitespace-nowrap px-5 py-2.5 rounded-full font-bold text-sm transition-all border ${activeCategory === null
+										? "bg-ink text-white border-ink shadow-md"
+										: "bg-white text-muted border-line hover:border-slate-300"
+									}`}
+							>
+								All Category
+							</button>
+							{categories.map(category => (
 								<button
-									key={category}
+									key={category.id}
 									onClick={() => setActiveCategory(category)}
 									className={`whitespace-nowrap px-5 py-2.5 rounded-full font-bold text-sm transition-all border ${activeCategory === category
 											? "bg-ink text-white border-ink shadow-md"
 											: "bg-white text-muted border-line hover:border-slate-300"
 										}`}
 								>
-									{category}
+									{category.name}
 								</button>
 							))}
 						</div>
@@ -199,7 +131,7 @@ export default function ProductListPage() {
 
 					{/* Product Grid */}
 					<AnimatePresence mode="wait">
-						{filteredProducts.length > 0 ? (
+						{/* {filteredProducts.length > 0 ? (
 							<motion.div
 								key="grid"
 								variants={staggerContainer}
@@ -231,7 +163,7 @@ export default function ProductListPage() {
 									Clear search
 								</button>
 							</motion.div>
-						)}
+						)} */}
 					</AnimatePresence>
 
 				</Container>
